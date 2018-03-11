@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!--配置几种不同的Appender-->
+    <!--控制台输出日志-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%thread] %highlight(%-5level) %cyan(%logger{15}) - %highlight(%msg) %n</pattern>
+        </encoder>
+    </appender>
+    <!--文件日志-->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <!--被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值-->
+         <file>${catalina.home}/logback/logback.log </file>
+        <!--如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。-->
+        <append>true</append>
+        <!--对记录事件进行格式化-->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <!--如果是 true，日志会被安全的写入文件，即使其他的FileAppender也在向此文件做写入操作，
+        效率低，默认是 false。-->
+        <prudent>false</prudent>
+    </appender>
+
+    <!--滚动日志-->
+    <appender name="rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <file>${catalina.home}/logback/rollingLog.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <!--当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名。-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--保存30天的日志，但这里的时间单位是天？-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <!--告知 RollingFileAppender 何时激活滚动-->
+        <triggerPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <!--默认值 为10MB-->
+            <maxFileSize>5MB</maxFileSize>
+        </triggerPolicy>
+    </appender>
+    <root level="INFO">
+        <appender-ref  ref="STDOUT"></appender-ref>
+        <appender-ref ref="FILE"></appender-ref>
+    </root>
+</configuration>

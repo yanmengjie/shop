@@ -1,0 +1,62 @@
+#breadcrumb .btn-group {
+    margin-top: 0;
+}
+
+@media (min-width: 480px) {
+    .tabOprate {
+        border: medium none;
+        height: 100%;
+        padding: 7px 14px 9px;
+    }
+
+    .tabs-left {
+        border: medium none;
+        height: 100%;
+        padding: 7px 14px 9px;
+    }
+
+    nav.page-tabs {
+        height: 36px;
+        margin-left: 40px;
+        overflow: hidden;
+        width: 100000px;
+        position: absolute;
+        margin-top: -36px;
+    }
+
+}
+
+.page-tabs-content .active {
+    background-color: #2e363f;
+    color: white;
+
+}
+
+@media (max-width: 480px) {
+    .tabs-left {
+        float: left;
+        border: medium none;
+        height: 100%;
+        padding: 7px 14px 9px;
+    }
+
+    .tabOprate {
+        float: right;
+        border: medium none;
+        height: 100%;
+        padding: 7px 14px 9px;
+    }
+
+    nav.page-tabs {
+        height: 36px;
+        margin-left: 40px;
+        overflow: hidden;
+        width: 100000px;
+        position: absolute;
+    }
+
+    #breadcrumb .btn-group {
+        display: none;
+    }
+
+}
